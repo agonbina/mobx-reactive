@@ -1,6 +1,6 @@
 {
   "name": "mobx-reactive-atom",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "The base reactive atom abstract class.",
   "main": "build/index.js",
   "scripts": {

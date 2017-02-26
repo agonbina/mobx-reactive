@@ -1,6 +1,6 @@
 {
   "name": "mobx-firebase",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "Mobx bindings to firebase references",
   "main": "build/index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "firebase": "^3.6.10"
   },
   "dependencies": {
-    "mobx-reactive-atom": "*"
+    "mobx-reactive-atom": "^1.0.0"
   },
   "peerDependencies": {
     "firebase": "^3.6.10",
