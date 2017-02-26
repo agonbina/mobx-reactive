@@ -1,0 +1,22 @@
+{
+  "name": "mobx-reactive-atom",
+  "version": "0.0.1",
+  "description": "The base reactive atom abstract class.",
+  "main": "build/index.js",
+  "scripts": {
+    "prebuild": "rimraf build",
+    "build": "tsc -p src/tsconfig.json --rootDir src --outDir build",
+    "postbuild": "dts-generator --name mobx-reactive-atom  --out index.d.ts --project src --main mobx-reactive-atom/index",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "dts-generator": "^2.1.0",
+    "rimraf": "^2.6.1",
+    "typescript": "2.1.x",
+    "mobx": "^3.1.0"
+  },
+  "peerDependencies": {
+    "mobx": "^3.1.0"
+  },
+  "license": "MIT"
+}

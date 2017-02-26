@@ -1,0 +1,35 @@
+{
+  "name": "mobx-firebase",
+  "version": "0.3.2",
+  "description": "Mobx bindings to firebase references",
+  "main": "build/index.js",
+  "scripts": {
+    "prebuild": "rimraf build",
+    "build": "tsc -p src/tsconfig.json --rootDir src --outDir build",
+    "postbuild": "dts-generator --name mobx-firebase  --out index.d.ts --project src --main mobx-firebase/index",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agonbina/mobx-firebase.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agonbina/mobx-firebase/issues"
+  },
+  "homepage": "https://github.com/agonbina/mobx-firebase#readme",
+  "devDependencies": {
+    "dts-generator": "^2.1.0",
+    "rimraf": "^2.6.1",
+    "typescript": "2.1.x",
+    "mobx": "^3.1.0",
+    "firebase": "^3.6.10"
+  },
+  "dependencies": {
+    "mobx-reactive-atom": "*"
+  },
+  "peerDependencies": {
+    "firebase": "^3.6.10",
+    "mobx": "^3.1.0"
+  }
+}
