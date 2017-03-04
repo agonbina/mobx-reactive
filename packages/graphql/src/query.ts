@@ -3,7 +3,7 @@ import { default as ReactiveAtom } from 'mobx-reactive-atom'
 
 export class ApolloQuery<T> extends ReactiveAtom<T> {
 
-  private subscription: Subscription
+  private subscription: Subscription | null
 
   constructor (private query: ObservableQuery<T>, private _canStart: Boolean = false) {
     super()
@@ -26,6 +26,7 @@ export class ApolloQuery<T> extends ReactiveAtom<T> {
   onUnobserve () {
     if (this.subscription) {
       this.subscription.unsubscribe()
+      this.subscription = null
     }
   }
 
