@@ -21,7 +21,7 @@ declare module 'mobx-firebase/list' {
 	    onRemove: (snapshot: any) => void;
 	    onChange: (snapshot: any) => void;
 	    onMove: (snapshot: any, prevKey: any) => void;
-	    onObserve(): void;
+	    onObserve(): any;
 	    onUnobserve(): void;
 	    onError: (error: any) => void;
 	}

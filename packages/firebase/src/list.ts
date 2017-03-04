@@ -54,12 +54,18 @@ export class FirebaseList<T> extends ReactiveAtom<Array<T>> {
     this.setCurrent(list)
   }
 
-  onObserve () {
-    this.setCurrent([])
-    this.ref.on('child_added', this.onAdd, this.onError)
-    this.ref.on('child_removed', this.onRemove, this.onError)
-    this.ref.on('child_changed', this.onChange, this.onError)
-    this.ref.on('child_moved', this.onMove, this.onError)
+  async onObserve () {
+    this.setCurrent([], true)
+    try {
+      await this.ref.limitToFirst(1).once('value')
+      this.ref.on('child_added', this.onAdd, this.onError)
+      this.ref.on('child_removed', this.onRemove, this.onError)
+      this.ref.on('child_changed', this.onChange, this.onError)
+      this.ref.on('child_moved', this.onMove, this.onError)
+      this.setLoading(false)
+    } catch (error) {
+      this.setError(error)
+    }
   }
 
   onUnobserve () {
@@ -67,6 +73,7 @@ export class FirebaseList<T> extends ReactiveAtom<Array<T>> {
     this.ref.off('child_removed', this.onRemove)
     this.ref.off('child_changed', this.onChange)
     this.ref.off('child_moved', this.onMove)
+    this.setLoading(false)
   }
 
   onError = (error) => {

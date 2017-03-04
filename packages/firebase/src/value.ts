@@ -16,11 +16,13 @@ export class FirebaseValue<T> extends ReactiveAtom<T> {
   }
 
   onObserve () {
+    this.setLoading(true)
     this.ref.on('value', this.onValue, error => this.setError(error))
   }
 
   onUnobserve () {
     this.ref.off('value', this.onValue)
+    this.setLoading(false)
   }
 
 }
