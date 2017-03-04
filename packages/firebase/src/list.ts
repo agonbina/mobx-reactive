@@ -4,13 +4,13 @@ import { default as ReactiveAtom } from 'mobx-reactive-atom'
 type Snapshot = firebase.database.DataSnapshot
 
 function createRecord (snapshot: Snapshot) {
-  var value = snapshot.val()
+  let value = snapshot.val()
   value['.key'] = snapshot.key
   return value
 }
 
 function indexForKey (array: Array<any>, key: string) {
-  for (var i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     if (array[i]['.key'] === key) {
       return i
     }
@@ -18,7 +18,7 @@ function indexForKey (array: Array<any>, key: string) {
   return -1
 }
 
-class FirebaseList<T> extends ReactiveAtom<Array<T>> {
+export class FirebaseList<T> extends ReactiveAtom<Array<T>> {
 
   constructor (private ref: firebase.database.Reference) {
     super()
@@ -75,4 +75,6 @@ class FirebaseList<T> extends ReactiveAtom<Array<T>> {
 
 }
 
-export default FirebaseList
+export const asList = <T>(ref: firebase.database.Reference) => {
+  return new FirebaseList<T>(ref)
+}

@@ -1,7 +1,7 @@
 import { ObservableQuery, Subscription } from 'apollo-client'
 import { default as ReactiveAtom } from 'mobx-reactive-atom'
 
-class ApolloQuery<T> extends ReactiveAtom<T> {
+export class ApolloQuery<T> extends ReactiveAtom<T> {
 
   private subscription: Subscription
 
@@ -40,4 +40,7 @@ class ApolloQuery<T> extends ReactiveAtom<T> {
 
 }
 
-export default ApolloQuery
+export const createQuery = <T>(query) => {
+  return new ApolloQuery<T>(query)
+}
+

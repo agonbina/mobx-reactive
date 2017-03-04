@@ -1,6 +1,7 @@
 declare module 'mobx-graphql/query' {
 	import { ObservableQuery } from 'apollo-client';
-	import { default as ReactiveAtom } from 'mobx-reactive-atom'; class ApolloQuery<T> extends ReactiveAtom<T> {
+	import { default as ReactiveAtom } from 'mobx-reactive-atom';
+	export class ApolloQuery<T> extends ReactiveAtom<T> {
 	    private query;
 	    private _canStart;
 	    private subscription;
@@ -11,12 +12,11 @@ declare module 'mobx-graphql/query' {
 	        [key: string]: any;
 	    }): void;
 	}
-	export default ApolloQuery;
+	export const createQuery: <T>(query: any) => ApolloQuery<T>;
 
 }
 declare module 'mobx-graphql/index' {
-	import ApolloQuery from 'mobx-graphql/query';
-	export const createQuery: <T>(query: any) => ApolloQuery<T>;
+	export { ApolloQuery, createQuery } from 'mobx-graphql/query';
 
 }
 declare module 'mobx-graphql' {

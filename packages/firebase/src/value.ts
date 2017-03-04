@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 import { default as ReactiveAtom } from 'mobx-reactive-atom'
 
-class FirebaseValue<T> extends ReactiveAtom<T> {
+export class FirebaseValue<T> extends ReactiveAtom<T> {
 
   constructor (private ref: firebase.database.Reference) {
     super()
@@ -25,4 +25,7 @@ class FirebaseValue<T> extends ReactiveAtom<T> {
 
 }
 
-export default FirebaseValue
+export const asValue = <T>(ref: firebase.database.Reference) => {
+  return new FirebaseValue<T>(ref)
+}
+
