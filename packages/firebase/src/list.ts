@@ -56,15 +56,19 @@ export class FirebaseList<T> extends ReactiveAtom<Array<T>> {
 
   async onObserve () {
     this.setCurrent([], true)
+    // We try to retrieve the first child to ensure the list is not empty and modify the loading state accordingly
     try {
-      await this.ref.limitToFirst(1).once('value')
+      const snap = await this.ref.limitToFirst(1).once('value')
+      if (!snap.val()) {
+        this.setLoading(false)
+      }
+      // Bind to the firebase list events
       this.ref.on('child_added', this.onAdd, this.onError)
       this.ref.on('child_removed', this.onRemove, this.onError)
       this.ref.on('child_changed', this.onChange, this.onError)
       this.ref.on('child_moved', this.onMove, this.onError)
-      this.setLoading(false)
     } catch (error) {
-      this.setError(error)
+      this.onError(error)
     }
   }
 
@@ -73,7 +77,6 @@ export class FirebaseList<T> extends ReactiveAtom<Array<T>> {
     this.ref.off('child_removed', this.onRemove)
     this.ref.off('child_changed', this.onChange)
     this.ref.off('child_moved', this.onMove)
-    this.setLoading(false)
   }
 
   onError = (error) => {
