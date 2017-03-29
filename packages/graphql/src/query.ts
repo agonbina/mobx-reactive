@@ -15,7 +15,11 @@ export class ApolloQuery<T> extends ReactiveAtom<T> {
     }
     this.subscription = this.query.subscribe({
       next: ({ data, loading }) => {
-        this.setCurrent(data, loading)
+        if (loading) {
+          this.setLoading(loading)
+        } else {
+          this.setCurrent(data, loading)
+        }
       },
       error: (error) => {
         this.setError(error)
